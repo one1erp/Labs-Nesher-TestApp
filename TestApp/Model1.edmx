@@ -1,0 +1,476 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model.Store" Alias="Self" Provider="Oracle.DataAccess.Client" ProviderManifestToken="11.2" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="CLIENT" EntityType="Model.Store.CLIENT" store:Type="Tables" Schema="LIMS" />
+          <EntitySet Name="CLIENT_USER" EntityType="Model.Store.CLIENT_USER" store:Type="Tables" Schema="LIMS" />
+          <EntitySet Name="U_CONTRACT" EntityType="Model.Store.U_CONTRACT" store:Type="Tables" Schema="LIMS" />
+          <EntitySet Name="U_CONTRACT_DATA" EntityType="Model.Store.U_CONTRACT_DATA" store:Type="Tables" Schema="LIMS" />
+          <EntitySet Name="U_CONTRACT_DATA_USER" EntityType="Model.Store.U_CONTRACT_DATA_USER" store:Type="Tables" Schema="LIMS" />
+          <EntitySet Name="U_CONTRACT_USER" EntityType="Model.Store.U_CONTRACT_USER" store:Type="Tables" Schema="LIMS" />
+          <AssociationSet Name="CLIENT_PARENT_VERSION" Association="Model.Store.CLIENT_PARENT_VERSION">
+            <End Role="CLIENT" EntitySet="CLIENT" />
+            <End Role="CLIENT1" EntitySet="CLIENT" />
+          </AssociationSet>
+          <AssociationSet Name="CLIENT_USER_CLIENT" Association="Model.Store.CLIENT_USER_CLIENT">
+            <End Role="CLIENT" EntitySet="CLIENT" />
+            <End Role="CLIENT_USER" EntitySet="CLIENT_USER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONTRACT_DATA_PARENT_VERSIO" Association="Model.Store.FK_CONTRACT_DATA_PARENT_VERSIO">
+            <End Role="U_CONTRACT_DATA" EntitySet="U_CONTRACT_DATA" />
+            <End Role="U_CONTRACT_DATA1" EntitySet="U_CONTRACT_DATA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONTRACT_DATA_USER_U_CONTRA" Association="Model.Store.FK_CONTRACT_DATA_USER_U_CONTRA">
+            <End Role="U_CONTRACT" EntitySet="U_CONTRACT" />
+            <End Role="U_CONTRACT_DATA_USER" EntitySet="U_CONTRACT_DATA_USER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONTRACT_PARENT_VERSION_ID" Association="Model.Store.FK_CONTRACT_PARENT_VERSION_ID">
+            <End Role="U_CONTRACT" EntitySet="U_CONTRACT" />
+            <End Role="U_CONTRACT1" EntitySet="U_CONTRACT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONTRACT_USER_U_CLIENT_ID" Association="Model.Store.FK_CONTRACT_USER_U_CLIENT_ID">
+            <End Role="CLIENT" EntitySet="CLIENT" />
+            <End Role="U_CONTRACT_USER" EntitySet="U_CONTRACT_USER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_U_CONTRACT_DATA_USER" Association="Model.Store.FK_U_CONTRACT_DATA_USER">
+            <End Role="U_CONTRACT_DATA" EntitySet="U_CONTRACT_DATA" />
+            <End Role="U_CONTRACT_DATA_USER" EntitySet="U_CONTRACT_DATA_USER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_U_CONTRACT_USER" Association="Model.Store.FK_U_CONTRACT_USER">
+            <End Role="U_CONTRACT" EntitySet="U_CONTRACT" />
+            <End Role="U_CONTRACT_USER" EntitySet="U_CONTRACT_USER" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="CLIENT">
+          <Key>
+            <PropertyRef Name="CLIENT_ID" />
+          </Key>
+          <Property Name="CLIENT_ID" Type="number" Nullable="false" Precision="16" />
+          <Property Name="GROUP_ID" Type="number" Precision="16" />
+          <Property Name="NAME" Type="varchar2" MaxLength="255" />
+          <Property Name="VERSION" Type="varchar2" MaxLength="10" />
+          <Property Name="DESCRIPTION" Type="varchar2" />
+          <Property Name="BAD_DEBT" Type="char" MaxLength="1" />
+          <Property Name="VERSION_STATUS" Type="char" MaxLength="1" />
+          <Property Name="CLIENT_DISCOUNT" Type="float" Precision="126" />
+          <Property Name="PARENT_VERSION_ID" Type="number" Precision="16" />
+          <Property Name="CLIENT_TYPE" Type="varchar2" MaxLength="255" />
+          <Property Name="CLIENT_CODE" Type="varchar2" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="CLIENT_USER">
+          <Key>
+            <PropertyRef Name="CLIENT_ID" />
+          </Key>
+          <Property Name="CLIENT_ID" Type="number" Nullable="false" Precision="16" />
+          <Property Name="U_LOCATION_CONTRACTDOCUMEN" Type="varchar2" MaxLength="30" />
+          <Property Name="U_CONTRACT_FILE_NAME" Type="varchar2" MaxLength="2000" />
+        </EntityType>
+        <EntityType Name="U_CONTRACT">
+          <Key>
+            <PropertyRef Name="U_CONTRACT_ID" />
+          </Key>
+          <Property Name="U_CONTRACT_ID" Type="number" Nullable="false" Precision="16" />
+          <Property Name="NAME" Type="varchar2" MaxLength="255" />
+          <Property Name="DESCRIPTION" Type="varchar2" MaxLength="2000" />
+          <Property Name="VERSION" Type="varchar2" MaxLength="10" />
+          <Property Name="VERSION_STATUS" Type="char" MaxLength="1" />
+          <Property Name="GROUP_ID" Type="number" Precision="16" />
+          <Property Name="PARENT_VERSION_ID" Type="number" Precision="16" />
+        </EntityType>
+        <EntityType Name="U_CONTRACT_DATA">
+          <Key>
+            <PropertyRef Name="U_CONTRACT_DATA_ID" />
+          </Key>
+          <Property Name="U_CONTRACT_DATA_ID" Type="number" Nullable="false" Precision="16" />
+          <Property Name="NAME" Type="varchar2" MaxLength="255" />
+          <Property Name="DESCRIPTION" Type="varchar2" MaxLength="2000" />
+          <Property Name="VERSION" Type="varchar2" MaxLength="10" />
+          <Property Name="VERSION_STATUS" Type="char" MaxLength="1" />
+          <Property Name="GROUP_ID" Type="number" Precision="16" />
+          <Property Name="PARENT_VERSION_ID" Type="number" Precision="16" />
+        </EntityType>
+        <EntityType Name="U_CONTRACT_DATA_USER">
+          <Key>
+            <PropertyRef Name="U_CONTRACT_DATA_ID" />
+          </Key>
+          <Property Name="U_CONTRACT_DATA_ID" Type="number" Nullable="false" Precision="16" />
+          <Property Name="U_CONTRACT_ID" Type="number" Precision="16" />
+          <Property Name="U_TEST_TEMPLATE_ID" Type="number" Precision="16" />
+          <Property Name="U_FINAL_PRICE" Type="number" />
+          <Property Name="U_REMARKS" Type="varchar2" MaxLength="2000" />
+        </EntityType>
+        <EntityType Name="U_CONTRACT_USER">
+          <Key>
+            <PropertyRef Name="U_CONTRACT_ID" />
+          </Key>
+          <Property Name="U_CONTRACT_ID" Type="number" Nullable="false" Precision="16" />
+          <Property Name="U_CLIENT_ID" Type="number" Precision="16" />
+          <Property Name="U_CONFIRM_DATE" Type="date" />
+        </EntityType>
+        <Association Name="CLIENT_PARENT_VERSION">
+          <End Role="CLIENT" Type="Model.Store.CLIENT" Multiplicity="0..1" />
+          <End Role="CLIENT1" Type="Model.Store.CLIENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENT">
+              <PropertyRef Name="CLIENT_ID" />
+            </Principal>
+            <Dependent Role="CLIENT1">
+              <PropertyRef Name="PARENT_VERSION_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CLIENT_USER_CLIENT">
+          <End Role="CLIENT" Type="Model.Store.CLIENT" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CLIENT_USER" Type="Model.Store.CLIENT_USER" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENT">
+              <PropertyRef Name="CLIENT_ID" />
+            </Principal>
+            <Dependent Role="CLIENT_USER">
+              <PropertyRef Name="CLIENT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONTRACT_DATA_PARENT_VERSIO">
+          <End Role="U_CONTRACT_DATA" Type="Model.Store.U_CONTRACT_DATA" Multiplicity="0..1" />
+          <End Role="U_CONTRACT_DATA1" Type="Model.Store.U_CONTRACT_DATA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="U_CONTRACT_DATA">
+              <PropertyRef Name="U_CONTRACT_DATA_ID" />
+            </Principal>
+            <Dependent Role="U_CONTRACT_DATA1">
+              <PropertyRef Name="PARENT_VERSION_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONTRACT_DATA_USER_U_CONTRA">
+          <End Role="U_CONTRACT" Type="Model.Store.U_CONTRACT" Multiplicity="0..1" />
+          <End Role="U_CONTRACT_DATA_USER" Type="Model.Store.U_CONTRACT_DATA_USER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="U_CONTRACT">
+              <PropertyRef Name="U_CONTRACT_ID" />
+            </Principal>
+            <Dependent Role="U_CONTRACT_DATA_USER">
+              <PropertyRef Name="U_CONTRACT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONTRACT_PARENT_VERSION_ID">
+          <End Role="U_CONTRACT" Type="Model.Store.U_CONTRACT" Multiplicity="0..1" />
+          <End Role="U_CONTRACT1" Type="Model.Store.U_CONTRACT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="U_CONTRACT">
+              <PropertyRef Name="U_CONTRACT_ID" />
+            </Principal>
+            <Dependent Role="U_CONTRACT1">
+              <PropertyRef Name="PARENT_VERSION_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONTRACT_USER_U_CLIENT_ID">
+          <End Role="CLIENT" Type="Model.Store.CLIENT" Multiplicity="0..1" />
+          <End Role="U_CONTRACT_USER" Type="Model.Store.U_CONTRACT_USER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENT">
+              <PropertyRef Name="CLIENT_ID" />
+            </Principal>
+            <Dependent Role="U_CONTRACT_USER">
+              <PropertyRef Name="U_CLIENT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_U_CONTRACT_DATA_USER">
+          <End Role="U_CONTRACT_DATA" Type="Model.Store.U_CONTRACT_DATA" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="U_CONTRACT_DATA_USER" Type="Model.Store.U_CONTRACT_DATA_USER" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="U_CONTRACT_DATA">
+              <PropertyRef Name="U_CONTRACT_DATA_ID" />
+            </Principal>
+            <Dependent Role="U_CONTRACT_DATA_USER">
+              <PropertyRef Name="U_CONTRACT_DATA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_U_CONTRACT_USER">
+          <End Role="U_CONTRACT" Type="Model.Store.U_CONTRACT" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="U_CONTRACT_USER" Type="Model.Store.U_CONTRACT_USER" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="U_CONTRACT">
+              <PropertyRef Name="U_CONTRACT_ID" />
+            </Principal>
+            <Dependent Role="U_CONTRACT_USER">
+              <PropertyRef Name="U_CONTRACT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CLIENTs" EntityType="Model.CLIENT" />
+          <EntitySet Name="U_CONTRACT" EntityType="Model.CONTRACT" />
+          <EntitySet Name="U_CONTRACT_DATA" EntityType="Model.CONTRACT_DATA" />
+          <AssociationSet Name="CLIENT_PARENT_VERSION" Association="Model.CLIENT_PARENT_VERSION">
+            <End Role="CLIENT" EntitySet="CLIENTs" />
+            <End Role="CLIENT1" EntitySet="CLIENTs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONTRACT_PARENT_VERSION_ID" Association="Model.FK_CONTRACT_PARENT_VERSION_ID">
+            <End Role="U_CONTRACT" EntitySet="U_CONTRACT" />
+            <End Role="U_CONTRACT1" EntitySet="U_CONTRACT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONTRACT_DATA_PARENT_VERSIO" Association="Model.FK_CONTRACT_DATA_PARENT_VERSIO">
+            <End Role="U_CONTRACT_DATA" EntitySet="U_CONTRACT_DATA" />
+            <End Role="U_CONTRACT_DATA1" EntitySet="U_CONTRACT_DATA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONTRACT_USER_U_CLIENT_ID" Association="Model.FK_CONTRACT_USER_U_CLIENT_ID">
+            <End Role="CLIENT" EntitySet="CLIENTs" />
+            <End Role="U_CONTRACT" EntitySet="U_CONTRACT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONTRACT_DATA_USER_U_CONTRA" Association="Model.FK_CONTRACT_DATA_USER_U_CONTRA">
+            <End Role="U_CONTRACT" EntitySet="U_CONTRACT" />
+            <End Role="U_CONTRACT_DATA" EntitySet="U_CONTRACT_DATA" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="CLIENT">
+          <Key>
+            <PropertyRef Name="CLIENT_ID" />
+          </Key>
+          <Property Name="CLIENT_ID" Type="Int64" Nullable="false" />
+          <Property Name="GROUP_ID" Type="Int64" />
+          <Property Name="NAME" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="VERSION" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="DESCRIPTION" Type="String" MaxLength="4000" Unicode="false" FixedLength="false" />
+          <Property Name="BAD_DEBT" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="VERSION_STATUS" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="CLIENT_DISCOUNT" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="PARENT_VERSION_ID" Type="Int64" />
+          <Property Name="CLIENT_TYPE" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="CLIENT_CODE" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="CLIENT1" Relationship="Model.CLIENT_PARENT_VERSION" FromRole="CLIENT" ToRole="CLIENT1" />
+          <NavigationProperty Name="CLIENT2" Relationship="Model.CLIENT_PARENT_VERSION" FromRole="CLIENT1" ToRole="CLIENT" />
+          <Property Type="String" Name="U_LOCATION_CONTRACTDOCUMEN" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="U_CONTRACT_FILE_NAME" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="U_CONTRACT_USER" Relationship="Model.FK_CONTRACT_USER_U_CLIENT_ID" FromRole="CLIENT" ToRole="U_CONTRACT" />
+        </EntityType>
+        <EntityType Name="CONTRACT">
+          <Key>
+            <PropertyRef Name="U_CONTRACT_ID" />
+          </Key>
+          <Property Name="U_CONTRACT_ID" Type="Int64" Nullable="false" />
+          <Property Name="NAME" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="DESCRIPTION" Type="String" MaxLength="2000" Unicode="false" FixedLength="false" />
+          <Property Name="VERSION" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="VERSION_STATUS" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="GROUP_ID" Type="Int64" />
+          <Property Name="PARENT_VERSION_ID" Type="Int64" />
+          <NavigationProperty Name="U_CONTRACT1" Relationship="Model.FK_CONTRACT_PARENT_VERSION_ID" FromRole="U_CONTRACT" ToRole="U_CONTRACT1" />
+          <NavigationProperty Name="U_CONTRACT2" Relationship="Model.FK_CONTRACT_PARENT_VERSION_ID" FromRole="U_CONTRACT1" ToRole="U_CONTRACT" />
+          <Property Type="Int64" Name="U_CLIENT_ID" />
+          <Property Type="DateTime" Name="U_CONFIRM_DATE" />
+          <NavigationProperty Name="CLIENT" Relationship="Model.FK_CONTRACT_USER_U_CLIENT_ID" FromRole="U_CONTRACT" ToRole="CLIENT" />
+          <NavigationProperty Name="U_CONTRACT_DATA_USER" Relationship="Model.FK_CONTRACT_DATA_USER_U_CONTRA" FromRole="U_CONTRACT" ToRole="U_CONTRACT_DATA" />
+        </EntityType>
+        <EntityType Name="CONTRACT_DATA">
+          <Key>
+            <PropertyRef Name="U_CONTRACT_DATA_ID" />
+          </Key>
+          <Property Name="U_CONTRACT_DATA_ID" Type="Int64" Nullable="false" />
+          <Property Name="NAME" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="DESCRIPTION" Type="String" MaxLength="2000" Unicode="false" FixedLength="false" />
+          <Property Name="VERSION" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="VERSION_STATUS" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="GROUP_ID" Type="Int64" />
+          <Property Name="PARENT_VERSION_ID" Type="Int64" />
+          <NavigationProperty Name="U_CONTRACT_DATA1" Relationship="Model.FK_CONTRACT_DATA_PARENT_VERSIO" FromRole="U_CONTRACT_DATA" ToRole="U_CONTRACT_DATA1" />
+          <NavigationProperty Name="U_CONTRACT_DATA2" Relationship="Model.FK_CONTRACT_DATA_PARENT_VERSIO" FromRole="U_CONTRACT_DATA1" ToRole="U_CONTRACT_DATA" />
+          <Property Type="String" Name="U_REMARKS" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="U_FINAL_PRICE" Precision="38" Scale="0" />
+          <Property Type="Int64" Name="U_TEST_TEMPLATE_ID" />
+          <Property Type="Int64" Name="U_CONTRACT_ID" />
+          <NavigationProperty Name="U_CONTRACT" Relationship="Model.FK_CONTRACT_DATA_USER_U_CONTRA" FromRole="U_CONTRACT_DATA" ToRole="U_CONTRACT" />
+        </EntityType>
+        <Association Name="CLIENT_PARENT_VERSION">
+          <End Role="CLIENT" Type="Model.CLIENT" Multiplicity="0..1" />
+          <End Role="CLIENT1" Type="Model.CLIENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENT">
+              <PropertyRef Name="CLIENT_ID" />
+            </Principal>
+            <Dependent Role="CLIENT1">
+              <PropertyRef Name="PARENT_VERSION_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONTRACT_PARENT_VERSION_ID">
+          <End Role="U_CONTRACT" Type="Model.CONTRACT" Multiplicity="0..1" />
+          <End Role="U_CONTRACT1" Type="Model.CONTRACT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="U_CONTRACT">
+              <PropertyRef Name="U_CONTRACT_ID" />
+            </Principal>
+            <Dependent Role="U_CONTRACT1">
+              <PropertyRef Name="PARENT_VERSION_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONTRACT_DATA_PARENT_VERSIO">
+          <End Role="U_CONTRACT_DATA" Type="Model.CONTRACT_DATA" Multiplicity="0..1" />
+          <End Role="U_CONTRACT_DATA1" Type="Model.CONTRACT_DATA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="U_CONTRACT_DATA">
+              <PropertyRef Name="U_CONTRACT_DATA_ID" />
+            </Principal>
+            <Dependent Role="U_CONTRACT_DATA1">
+              <PropertyRef Name="PARENT_VERSION_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONTRACT_USER_U_CLIENT_ID">
+          <End Type="Model.CLIENT" Role="CLIENT" Multiplicity="0..1" />
+          <End Type="Model.CONTRACT" Role="U_CONTRACT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENT">
+              <PropertyRef Name="CLIENT_ID" />
+            </Principal>
+            <Dependent Role="U_CONTRACT">
+              <PropertyRef Name="U_CLIENT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONTRACT_DATA_USER_U_CONTRA">
+          <End Type="Model.CONTRACT" Role="U_CONTRACT" Multiplicity="0..1" />
+          <End Type="Model.CONTRACT_DATA" Role="U_CONTRACT_DATA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="U_CONTRACT">
+              <PropertyRef Name="U_CONTRACT_ID" />
+            </Principal>
+            <Dependent Role="U_CONTRACT_DATA">
+              <PropertyRef Name="U_CONTRACT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="CLIENTs"><EntityTypeMapping TypeName="Model.CLIENT"><MappingFragment StoreEntitySet="CLIENT">
+            <ScalarProperty Name="CLIENT_ID" ColumnName="CLIENT_ID" />
+            <ScalarProperty Name="GROUP_ID" ColumnName="GROUP_ID" />
+            <ScalarProperty Name="NAME" ColumnName="NAME" />
+            <ScalarProperty Name="VERSION" ColumnName="VERSION" />
+            <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+            <ScalarProperty Name="BAD_DEBT" ColumnName="BAD_DEBT" />
+            <ScalarProperty Name="VERSION_STATUS" ColumnName="VERSION_STATUS" />
+            <ScalarProperty Name="CLIENT_DISCOUNT" ColumnName="CLIENT_DISCOUNT" />
+            <ScalarProperty Name="PARENT_VERSION_ID" ColumnName="PARENT_VERSION_ID" />
+            <ScalarProperty Name="CLIENT_TYPE" ColumnName="CLIENT_TYPE" />
+            <ScalarProperty Name="CLIENT_CODE" ColumnName="CLIENT_CODE" />
+          </MappingFragment></EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(Model.CLIENT)">
+              <MappingFragment StoreEntitySet="CLIENT_USER">
+                <ScalarProperty Name="U_CONTRACT_FILE_NAME" ColumnName="U_CONTRACT_FILE_NAME" />
+                <ScalarProperty Name="U_LOCATION_CONTRACTDOCUMEN" ColumnName="U_LOCATION_CONTRACTDOCUMEN" />
+                <ScalarProperty Name="CLIENT_ID" ColumnName="CLIENT_ID" />
+              </MappingFragment>
+            </EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="U_CONTRACT"><EntityTypeMapping TypeName="Model.CONTRACT"><MappingFragment StoreEntitySet="U_CONTRACT">
+            <ScalarProperty Name="U_CONTRACT_ID" ColumnName="U_CONTRACT_ID" />
+            <ScalarProperty Name="NAME" ColumnName="NAME" />
+            <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+            <ScalarProperty Name="VERSION" ColumnName="VERSION" />
+            <ScalarProperty Name="VERSION_STATUS" ColumnName="VERSION_STATUS" />
+            <ScalarProperty Name="GROUP_ID" ColumnName="GROUP_ID" />
+            <ScalarProperty Name="PARENT_VERSION_ID" ColumnName="PARENT_VERSION_ID" />
+          </MappingFragment></EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(Model.CONTRACT)">
+              <MappingFragment StoreEntitySet="U_CONTRACT_USER">
+                <ScalarProperty Name="U_CONFIRM_DATE" ColumnName="U_CONFIRM_DATE" />
+                <ScalarProperty Name="U_CLIENT_ID" ColumnName="U_CLIENT_ID" />
+                <ScalarProperty Name="U_CONTRACT_ID" ColumnName="U_CONTRACT_ID" />
+              </MappingFragment>
+            </EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="U_CONTRACT_DATA"><EntityTypeMapping TypeName="Model.CONTRACT_DATA"><MappingFragment StoreEntitySet="U_CONTRACT_DATA">
+            <ScalarProperty Name="U_CONTRACT_DATA_ID" ColumnName="U_CONTRACT_DATA_ID" />
+            <ScalarProperty Name="NAME" ColumnName="NAME" />
+            <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+            <ScalarProperty Name="VERSION" ColumnName="VERSION" />
+            <ScalarProperty Name="VERSION_STATUS" ColumnName="VERSION_STATUS" />
+            <ScalarProperty Name="GROUP_ID" ColumnName="GROUP_ID" />
+            <ScalarProperty Name="PARENT_VERSION_ID" ColumnName="PARENT_VERSION_ID" />
+          </MappingFragment></EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(Model.CONTRACT_DATA)">
+              <MappingFragment StoreEntitySet="U_CONTRACT_DATA_USER">
+                <ScalarProperty Name="U_REMARKS" ColumnName="U_REMARKS" />
+                <ScalarProperty Name="U_FINAL_PRICE" ColumnName="U_FINAL_PRICE" />
+                <ScalarProperty Name="U_TEST_TEMPLATE_ID" ColumnName="U_TEST_TEMPLATE_ID" />
+                <ScalarProperty Name="U_CONTRACT_ID" ColumnName="U_CONTRACT_ID" />
+                <ScalarProperty Name="U_CONTRACT_DATA_ID" ColumnName="U_CONTRACT_DATA_ID" />
+              </MappingFragment>
+            </EntityTypeMapping></EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Model1" ZoomLevel="89">
+        <EntityTypeShape EntityType="Model.CLIENT" Width="1.5" PointX="0.75" PointY="6.75" Height="3.4001269531249996" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.CONTRACT" Width="2.75" PointX="0.75" PointY="3.25" Height="2.7427376302083339" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.CONTRACT_DATA" Width="2.75" PointX="3.875" PointY="6.75" Height="3.2357796223958335" IsExpanded="true" />
+        <AssociationConnector Association="Model.CLIENT_PARENT_VERSION" ManuallyRouted="false">
+          <ConnectorPoint PointX="1.2819230769230767" PointY="10.314474283854166" />
+          <ConnectorPoint PointX="1.2819230769230767" PointY="10.564474283854166" />
+          <ConnectorPoint PointX="1.7284615384615383" PointY="10.564474283854166" />
+          <ConnectorPoint PointX="1.7284615384615383" PointY="10.314474283854166" />
+        </AssociationConnector>
+        <AssociationConnector Association="Model.FK_CONTRACT_PARENT_VERSION_ID" ManuallyRouted="false">
+          <ConnectorPoint PointX="1.7251923076923075" PointY="6.3214322916666656" />
+          <ConnectorPoint PointX="1.7251923076923075" PointY="6.5714322916666656" />
+          <ConnectorPoint PointX="2.5438461538461534" PointY="6.5714322916666656" />
+          <ConnectorPoint PointX="2.5438461538461534" PointY="6.3214322916666656" />
+        </AssociationConnector>
+        <AssociationConnector Association="Model.FK_CONTRACT_DATA_PARENT_VERSIO" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.8501923076923079" PointY="9.9857796223958335" />
+          <ConnectorPoint PointX="4.8501923076923079" PointY="10.235779622395832" />
+          <ConnectorPoint PointX="5.6688461538461539" PointY="10.235779622395832" />
+          <ConnectorPoint PointX="5.6688461538461539" PointY="9.9857796223958335" />
+        </AssociationConnector>
+        <AssociationConnector Association="Model.FK_CONTRACT_USER_U_CLIENT_ID" >
+          <ConnectorPoint PointX="1.1750961538461537" PointY="6.75" />
+          <ConnectorPoint PointX="1.1750961538461537" PointY="6.3214322916666656" />
+        </AssociationConnector>
+        <AssociationConnector Association="Model.FK_CONTRACT_DATA_USER_U_CONTRA" >
+          <ConnectorPoint PointX="3.5" PointY="6.3214322916666656" />
+          <ConnectorPoint PointX="3.875" PointY="6.7499999999999991" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>
